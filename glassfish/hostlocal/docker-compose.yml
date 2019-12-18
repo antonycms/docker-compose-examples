@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  glassfish:
+    image: glassfish-local
+    container_name: glassfish-docker
+    volumes: 
+      - ./war:/usr/local/glassfish4/warfiles
+    network_mode: host

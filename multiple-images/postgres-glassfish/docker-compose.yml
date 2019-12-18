@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres-docker-multiple
+    environment: 
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    volumes:
+      - ./.volume_databases/postgres:/var/lib/postgresql/data
+      - ./dump:/backup
+      - ./init/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init/init.sh:/docker-entrypoint-initdb.d/init.sh
+    ports:
+      - 5432:5432
+    networks:
+      - example-network
+  glassfish:
+    image: glassfish-local
+    container_name: glassfish-docker-multiple
+    volumes: 
+      - ./war:/usr/local/glassfish4/warfiles
+    network_mode: host
+
+networks: 
+  example-network:
+    driver: bridge

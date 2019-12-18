@@ -1,0 +1,1 @@
+pg_restore -U myuser -d mydatabase ./backup/example.dump

@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  node:
+    image: node
+    container_name: nodejs-docker
+    env_file: ./yourproject/.env
+    ports:
+      - "3333:3333"
+    working_dir: "/home/yourproject/node/app"
+    volumes:
+      - ./yourproject/:/home/yourproject/node/app
+    networks:
+      - example-network
+    command: "yarn start"
+
+networks: 
+example-network:
+  driver: bridge
